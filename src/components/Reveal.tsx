@@ -52,8 +52,10 @@ export function Reveal({
     <Tag
       ref={ref as never}
       style={{ transitionDelay: `${delay}ms` }}
-      className={`transition-all duration-700 ease-reveal motion-reduce:transition-none ${
-        visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+      className={`transition-all duration-1000 ease-fluid motion-reduce:transition-none ${
+        visible
+          ? "opacity-100 translate-y-0 blur-0"
+          : "opacity-0 translate-y-12 blur-[6px]"
       } ${className}`}
     >
       {children}

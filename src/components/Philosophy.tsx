@@ -1,39 +1,42 @@
-import { Users, LineChart, Rocket } from "lucide-react";
 import { philosophy } from "../data/content";
-import { Section, SectionHeader } from "./Section";
+import { Section } from "./Section";
 import { Reveal } from "./Reveal";
-
-const icons = [Users, LineChart, Rocket];
 
 export function Philosophy() {
   return (
-    <Section tone="a">
-      <SectionHeader
-        eyebrow={philosophy.eyebrow}
-        heading={philosophy.heading}
-        align="center"
-      />
-      <div className="grid gap-6 md:grid-cols-3">
-        {philosophy.items.map((item, i) => {
-          const Icon = icons[i] ?? Users;
-          return (
+    <Section tone="deep">
+      <div className="grid gap-10 md:grid-cols-12 md:gap-16">
+        <div className="md:col-span-4">
+          <div className="md:sticky md:top-28">
+            <span className="eyebrow mb-5">{philosophy.eyebrow}</span>
+            <h2 className="mt-3 font-serif text-4xl font-medium leading-[1.05] tracking-[-0.02em] text-ink sm:text-5xl">
+              {philosophy.heading}
+            </h2>
+          </div>
+        </div>
+
+        <ol className="md:col-span-8">
+          {philosophy.items.map((item, i) => (
             <Reveal
+              as="li"
               key={item.title}
-              delay={i * 80}
-              className="rounded-2xl border border-border bg-card p-7 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-elegant"
+              delay={i * 90}
+              className="grid grid-cols-[auto_1fr] gap-6 border-t border-line py-9 first:border-t-0 first:pt-0 md:gap-10"
             >
-              <div className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-secondary text-secondary-foreground">
-                <Icon className="h-5 w-5" aria-hidden="true" />
+              <span className="font-serif text-2xl font-medium italic text-sage">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <div>
+                <h3 className="font-serif text-2xl font-medium text-ink">
+                  {item.title}
+                </h3>
+                <p className="mt-3 max-w-xl leading-relaxed text-ink-soft">
+                  {item.body}
+                </p>
               </div>
-              <h3 className="text-lg font-semibold text-card-foreground">
-                {item.title}
-              </h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                {item.body}
-              </p>
             </Reveal>
-          );
-        })}
+          ))}
+        </ol>
       </div>
     </Section>
   );

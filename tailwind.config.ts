@@ -1,95 +1,72 @@
 import type { Config } from "tailwindcss";
 import animate from "tailwindcss-animate";
 
-// Design tokens mirror the original portfolio's HSL palette so the rebuild
-// matches the source pixel-for-pixel. Colors are exposed as hsl(var(--token))
-// so the same variables drive Tailwind utilities and raw CSS.
+/**
+ * Editorial Luxury design system.
+ * Warm paper surfaces, espresso ink, a single sage accent, high-contrast
+ * serif display (Playfair Display) paired with a clean grotesk (Plus Jakarta
+ * Sans). Tokens are HSL triplets exposed as hsl(var(--token)).
+ */
 export default {
   content: ["./index.html", "./src/**/*.{ts,tsx}"],
   theme: {
     container: {
       center: true,
       padding: "1.5rem",
-      screens: { "2xl": "1400px" },
+      screens: { "2xl": "1240px" },
     },
     extend: {
+      fontFamily: {
+        serif: ['"Playfair Display Variable"', "Georgia", "Cambria", "serif"],
+        sans: [
+          '"Plus Jakarta Sans Variable"',
+          "ui-sans-serif",
+          "system-ui",
+          "sans-serif",
+        ],
+      },
       colors: {
-        border: "hsl(var(--border))",
-        input: "hsl(var(--input))",
-        ring: "hsl(var(--ring))",
-        background: "hsl(var(--background))",
-        foreground: "hsl(var(--foreground))",
-        primary: {
-          DEFAULT: "hsl(var(--primary))",
-          foreground: "hsl(var(--primary-foreground))",
-          glow: "hsl(var(--primary-glow))",
+        paper: "hsl(var(--paper))",
+        "paper-deep": "hsl(var(--paper-deep))",
+        card: "hsl(var(--card))",
+        ink: {
+          DEFAULT: "hsl(var(--ink))",
+          soft: "hsl(var(--ink-soft))",
+          faint: "hsl(var(--ink-faint))",
         },
-        secondary: {
-          DEFAULT: "hsl(var(--secondary))",
-          foreground: "hsl(var(--secondary-foreground))",
+        sage: {
+          DEFAULT: "hsl(var(--sage))",
+          deep: "hsl(var(--sage-deep))",
+          soft: "hsl(var(--sage-soft))",
         },
-        accent: {
-          DEFAULT: "hsl(var(--accent))",
-          foreground: "hsl(var(--accent-foreground))",
-        },
-        tertiary: {
-          DEFAULT: "hsl(var(--tertiary))",
-          foreground: "hsl(var(--tertiary-foreground))",
-        },
-        muted: {
-          DEFAULT: "hsl(var(--muted))",
-          foreground: "hsl(var(--muted-foreground))",
-        },
-        card: {
-          DEFAULT: "hsl(var(--card))",
-          foreground: "hsl(var(--card-foreground))",
-        },
-        success: "hsl(var(--success))",
-        "section-dark": "hsl(var(--section-dark))",
-        "section-a": "hsl(var(--section-a))",
-        "section-b": "hsl(var(--section-b))",
+        line: "hsl(var(--line))",
       },
       borderRadius: {
-        lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
-      },
-      backgroundImage: {
-        "gradient-primary": "var(--gradient-primary)",
-        "gradient-cool": "var(--gradient-cool)",
-        "gradient-warm": "var(--gradient-warm)",
-        "gradient-rainbow": "var(--gradient-rainbow)",
+        "4xl": "2rem",
+        "5xl": "2.75rem",
       },
       boxShadow: {
-        elegant: "var(--shadow-elegant)",
-        glow: "var(--shadow-glow)",
+        soft: "0 24px 60px -28px hsl(28 25% 15% / 0.28), 0 8px 24px -16px hsl(28 25% 15% / 0.14)",
+        lift: "0 40px 90px -40px hsl(28 25% 15% / 0.35), 0 12px 30px -18px hsl(28 25% 15% / 0.18)",
+        inset: "inset 0 1px 1px hsl(40 50% 100% / 0.6)",
       },
       transitionTimingFunction: {
-        bounce: "cubic-bezier(0.68, -0.55, 0.265, 1.55)",
-        smooth: "cubic-bezier(0.4, 0, 0.2, 1)",
-        reveal: "cubic-bezier(0.16, 1, 0.3, 1)",
+        fluid: "cubic-bezier(0.32, 0.72, 0, 1)",
+        spring: "cubic-bezier(0.34, 1.56, 0.64, 1)",
       },
       keyframes: {
-        "fade-in": {
-          from: { opacity: "0", transform: "translateY(16px)" },
+        "fade-up": {
+          from: { opacity: "0", transform: "translateY(24px)" },
           to: { opacity: "1", transform: "translateY(0)" },
         },
         "scale-in": {
-          from: { opacity: "0", transform: "scale(0.96)" },
+          from: { opacity: "0", transform: "scale(0.97)" },
           to: { opacity: "1", transform: "scale(1)" },
-        },
-        "accordion-down": {
-          from: { height: "0" },
-          to: { height: "var(--radix-accordion-content-height)" },
-        },
-        "accordion-up": {
-          from: { height: "var(--radix-accordion-content-height)" },
-          to: { height: "0" },
         },
       },
       animation: {
-        "fade-in": "fade-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) both",
-        "scale-in": "scale-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) both",
+        "fade-up": "fade-up 0.9s cubic-bezier(0.32,0.72,0,1) both",
+        "scale-in": "scale-in 0.5s cubic-bezier(0.32,0.72,0,1) both",
       },
     },
   },

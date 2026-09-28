@@ -9,7 +9,19 @@ A fast, static, single-page product-manager portfolio built with **Vite + React 
 - [Vite](https://vitejs.dev/) — build tool & dev server
 - [React 18](https://react.dev/) + TypeScript
 - [Tailwind CSS 3](https://tailwindcss.com/) with `tailwindcss-animate`
-- [lucide-react](https://lucide.dev/) — icons
+- [@phosphor-icons/react](https://phosphoricons.com/) — light-stroke icons
+- Self-hosted fonts via [Fontsource](https://fontsource.org/): **Playfair Display** (serif display) + **Plus Jakarta Sans** (body)
+
+## Design system — "Editorial Luxury"
+
+A warm, print-inspired identity: paper/cream surfaces with a subtle film-grain
+overlay, high-contrast serif display headings, a single **sage** accent, and
+"double-bezel" nested cards (an inner core seated in an outer shell for a
+machined, physical feel). Motion is spring-eased (custom cubic-beziers), with
+scroll-reveal fade-ups and button-in-button CTA physics. All design tokens
+(colors, radii, shadows, fonts) live in [tailwind.config.ts](tailwind.config.ts)
+and [src/index.css](src/index.css) as HSL variables — change the palette in one
+place.
 
 ## Project structure
 

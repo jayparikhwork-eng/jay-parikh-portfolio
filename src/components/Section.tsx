@@ -2,16 +2,21 @@ import type { ReactNode } from "react";
 
 type SectionProps = {
   id?: string;
-  tone?: "a" | "b";
+  tone?: "paper" | "deep";
   className?: string;
   children: ReactNode;
 };
 
-/** Standard light content section with the source's alternating background tint. */
-export function Section({ id, tone = "a", className = "", children }: SectionProps) {
-  const bg = tone === "a" ? "bg-section-a" : "bg-section-b";
+/** Standard editorial section: heavy vertical rhythm, alternating warm tone. */
+export function Section({
+  id,
+  tone = "paper",
+  className = "",
+  children,
+}: SectionProps) {
+  const bg = tone === "deep" ? "bg-paper-deep" : "bg-paper";
   return (
-    <section id={id} className={`${bg} py-16 md:py-24 ${className}`}>
+    <section id={id} className={`${bg} px-4 py-24 md:py-32 ${className}`}>
       <div className="container">{children}</div>
     </section>
   );
@@ -21,30 +26,34 @@ type HeaderProps = {
   eyebrow?: string;
   heading: string;
   intro?: string;
-  headingClassName?: string;
   align?: "left" | "center";
+  headingClassName?: string;
 };
 
 export function SectionHeader({
   eyebrow,
   heading,
   intro,
-  headingClassName = "",
   align = "left",
+  headingClassName = "",
 }: HeaderProps) {
-  const alignment = align === "center" ? "text-center mx-auto" : "";
+  const isCenter = align === "center";
   return (
-    <div className={`mb-12 max-w-3xl ${alignment}`}>
-      {eyebrow && (
-        <p className="mb-2 text-sm font-semibold uppercase tracking-[0.2em] text-primary">
-          {eyebrow}
-        </p>
-      )}
-      <h2 className={`text-3xl font-bold tracking-tight sm:text-4xl ${headingClassName}`}>
+    <div
+      className={`mb-14 max-w-2xl ${isCenter ? "mx-auto text-center" : ""}`}
+    >
+      {eyebrow && <span className="eyebrow mb-5">{eyebrow}</span>}
+      <h2
+        className={`mt-3 font-serif text-4xl font-medium leading-[1.05] tracking-[-0.02em] text-ink sm:text-5xl ${headingClassName}`}
+      >
         {heading}
       </h2>
       {intro && (
-        <p className="mt-4 text-base leading-relaxed text-muted-foreground">
+        <p
+          className={`mt-5 text-base leading-relaxed text-ink-soft sm:text-lg ${
+            isCenter ? "mx-auto" : ""
+          }`}
+        >
           {intro}
         </p>
       )}

@@ -1,69 +1,51 @@
-import { ArrowRight } from "lucide-react";
 import { hero } from "../data/content";
 import { asset } from "../lib/asset";
+import { CtaButton } from "./CtaButton";
 
 export function Hero() {
   return (
     <section
       id="top"
-      className="relative overflow-hidden bg-section-dark text-white"
+      className="relative overflow-hidden px-4 pb-16 pt-32 md:pb-24 md:pt-40"
     >
-      {/* Decorative background glows (purely visual) */}
+      {/* soft sage aura */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0"
-      >
-        <div className="absolute -left-24 top-10 h-72 w-72 rounded-full bg-primary/20 blur-3xl" />
-        <div className="absolute right-0 top-1/3 h-80 w-80 rounded-full bg-fuchsia-500/10 blur-3xl" />
-      </div>
-
-      <div className="container relative grid items-center gap-10 py-16 text-center md:grid-cols-[1.2fr_0.8fr] md:gap-12 md:py-28 md:text-left">
-        <div className="order-2 animate-fade-in md:order-1">
-          <p className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-primary-glow">
-            {hero.eyebrow}
-          </p>
-          <h1 className="text-4xl font-bold leading-tight tracking-tight sm:text-5xl lg:text-6xl">
+        className="pointer-events-none absolute -right-40 -top-24 h-[36rem] w-[36rem] rounded-full bg-sage/10 blur-[120px]"
+      />
+      <div className="container relative grid items-center gap-12 md:grid-cols-[1.15fr_0.85fr] lg:gap-16">
+        <div className="animate-fade-up">
+          <span className="eyebrow mb-6">{hero.eyebrow}</span>
+          <h1 className="mt-2 font-serif text-5xl font-medium leading-[0.98] tracking-[-0.02em] text-ink sm:text-6xl lg:text-7xl">
             {hero.headingLine1}
             <br />
-            <span className="text-primary">{hero.headingLine2}</span>
+            <span className="italic text-sage">{hero.headingLine2}</span>
           </h1>
-          <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-white/70 md:mx-0">
+          <p className="mt-7 max-w-xl text-base leading-relaxed text-ink-soft sm:text-lg">
             {hero.body}
           </p>
-          <div className="mt-8 flex flex-wrap justify-center gap-4 md:justify-start">
-            <a
-              href={hero.primaryCta.href}
-              className="group inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-sm transition-all hover:bg-primary/90 hover:shadow-glow active:translate-y-px"
-            >
+          <div className="mt-9 flex flex-wrap items-center gap-3">
+            <CtaButton href={hero.primaryCta.href}>
               {hero.primaryCta.label}
-              <ArrowRight
-                className="h-4 w-4 transition-transform group-hover:translate-x-0.5"
-                aria-hidden="true"
-              />
-            </a>
-            <a
-              href={hero.secondaryCta.href}
-              className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-6 py-3 text-sm font-semibold text-white transition-all hover:bg-white/10 active:translate-y-px"
-            >
+            </CtaButton>
+            <CtaButton href={hero.secondaryCta.href} variant="secondary">
               {hero.secondaryCta.label}
-            </a>
+            </CtaButton>
           </div>
         </div>
 
-        <div className="order-1 flex justify-center md:order-2 md:justify-end">
-          <div className="relative">
-            <div
-              aria-hidden="true"
-              className="absolute inset-0 -z-10 scale-110 rounded-full bg-gradient-primary opacity-40 blur-2xl"
-            />
-            <img
-              src={asset(hero.image)}
-              alt={hero.imageAlt}
-              width={208}
-              height={208}
-              fetchPriority="high"
-              className="h-48 w-48 rounded-full object-cover shadow-2xl ring-4 ring-primary/40 sm:h-52 sm:w-52"
-            />
+        <div className="animate-fade-up [animation-delay:150ms]">
+          <div className="bezel mx-auto max-w-sm rotate-1 transition-transform duration-700 ease-fluid hover:rotate-0 md:ml-auto">
+            <div className="bezel-core overflow-hidden">
+              <img
+                src={asset(hero.image)}
+                alt={hero.imageAlt}
+                width={480}
+                height={560}
+                fetchPriority="high"
+                className="aspect-[4/5] w-full object-cover"
+              />
+            </div>
           </div>
         </div>
       </div>

@@ -1,67 +1,36 @@
+/* Self-hosted premium fonts (no external <link>) */
+@import "@fontsource-variable/playfair-display/index.css";
+@import "@fontsource-variable/plus-jakarta-sans/index.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 /*
-  Design tokens extracted from the original site (HSL triplets so they compose
-  with Tailwind's hsl(var(--token)) color utilities). Single-theme (light page
-  with dark feature blocks) to match the source exactly.
+  Editorial Luxury tokens — warm paper, espresso ink, sage accent.
+  Single light theme, locked page-wide.
 */
 @layer base {
   :root {
-    --background: 320 15% 97%;
-    --foreground: 222.2 84% 4.9%;
+    --paper: 40 33% 97%; /* main background */
+    --paper-deep: 38 26% 93%; /* alternating panel */
+    --card: 42 46% 99%; /* inner card core */
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --ink: 28 20% 12%; /* warm near-black */
+    --ink-soft: 30 8% 34%; /* body text */
+    --ink-faint: 32 9% 52%; /* meta / captions */
 
-    --primary: 234 89% 74%;
-    --primary-foreground: 210 40% 98%;
-    --primary-glow: 234 89% 84%;
+    --sage: 108 13% 38%; /* accent */
+    --sage-deep: 110 16% 26%;
+    --sage-soft: 96 22% 90%; /* pale tint for pills / fills */
 
-    --secondary: 270 95% 95%;
-    --secondary-foreground: 234 89% 44%;
-
-    --accent: 316 70% 95%;
-    --accent-foreground: 234 89% 44%;
-
-    --tertiary: 142 76% 36%;
-    --tertiary-foreground: 355.7 100% 97.3%;
-
-    --success: 142 76% 36%;
-
-    --muted: 320 20% 94%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-
-    --border: 320 25% 88%;
-    --input: 320 25% 88%;
-    --ring: 234 89% 74%;
-
-    /* Feature-block surfaces */
-    --section-dark: 222.2 47% 8%;
-    --section-a: 240 20% 96%;
-    --section-b: 320 15% 97%;
+    --line: 34 20% 85%; /* hairlines */
 
     --radius: 0.5rem;
-
-    --gradient-primary: linear-gradient(135deg, hsl(234 89% 74%), hsl(234 89% 84%));
-    --gradient-cool: linear-gradient(135deg, hsl(234 89% 74%), hsl(210 40% 95%));
-    --gradient-warm: linear-gradient(135deg, hsl(316 70% 95%), hsl(270 95% 95%));
-    --gradient-rainbow: linear-gradient(
-      90deg,
-      hsl(234 89% 74%),
-      hsl(270 95% 95%),
-      hsl(316 70% 95%),
-      hsl(210 40% 95%),
-      hsl(142 76% 36%)
-    );
-
-    --shadow-elegant: 0 4px 6px -1px hsl(222.2 84% 4.9% / 0.1);
-    --shadow-glow: 0 0 20px hsl(234 89% 74% / 0.2);
   }
 
   * {
-    @apply border-border;
+    border-color: hsl(var(--line));
   }
 
   html {
@@ -69,32 +38,47 @@
     color-scheme: light;
   }
 
-  /* Offset in-page anchors so section tops clear the sticky header. */
   [id] {
-    scroll-margin-top: 5rem;
+    scroll-margin-top: 6rem;
+  }
+
+  body {
+    background-color: hsl(var(--paper));
+    color: hsl(var(--ink));
+    font-family: "Plus Jakarta Sans Variable", ui-sans-serif, system-ui,
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
   }
 
   h1,
   h2,
-  h3 {
+  h3,
+  h4 {
+    font-family: "Playfair Display Variable", Georgia, serif;
     text-wrap: balance;
   }
 
-  /* Snappier taps on touch devices (removes 300ms double-tap zoom delay). */
   a,
   button {
     touch-action: manipulation;
   }
 
-  body {
-    @apply bg-background text-foreground antialiased;
-    font-family:
-      ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-      Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji",
-      "Segoe UI Emoji";
+  ::selection {
+    background: hsl(var(--sage) / 0.22);
   }
 
-  /* Respect reduced-motion: disable smooth scroll + animations */
+  /* Fixed film-grain overlay for a physical paper feel */
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 40;
+    pointer-events: none;
+    opacity: 0.045;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
   @media (prefers-reduced-motion: reduce) {
     html {
       scroll-behavior: auto;
@@ -108,10 +92,24 @@
     }
   }
 
-  /* Visible, consistent focus ring for keyboard users */
   :focus-visible {
-    outline: 2px solid hsl(var(--primary));
-    outline-offset: 2px;
-    border-radius: 4px;
+    outline: 2px solid hsl(var(--sage));
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+}
+
+@layer components {
+  /* Editorial small-caps label */
+  .eyebrow {
+    @apply inline-flex items-center gap-2 rounded-full border border-line bg-card/70 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.22em] text-ink-soft;
+  }
+
+  /* Double-bezel: outer shell + inner core (machined-hardware look) */
+  .bezel {
+    @apply rounded-4xl border border-line bg-ink/[0.03] p-1.5;
+  }
+  .bezel-core {
+    @apply rounded-[calc(2rem-0.375rem)] bg-card shadow-inset;
   }
 }
